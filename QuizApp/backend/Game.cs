@@ -9,34 +9,52 @@ namespace QuizApp.backend
     public class Game
     {
         public List<Question> Questions { get; set; }
+        public Question CurrentQuestion { get; set; }
         public int CurrentCategory { get; set; } = 100;
 
         public void CreateQuestions()
         {
+            // utworzyć prawdziwe pytania
             Questions = new List<Question>();
 
             var q1 = new Question();
             q1.Category = 100;
             q1.Content = "Jak miał na imię Einstein?";
-            q1.Answer1 = "Albert";
-            q1.Answer2 = "Adam";
-            q1.Answer3 = "John";
-            q1.Answer4 = "Tom";
-            Questions.Add(q1);
 
-            var q2 = new Question();
-            q2.Category = 200;
-            q2.Content = "Jaka jest stolica Chile?";
-            q2.Answer1 = "Santiago";
-            q2.Answer2 = "Nowy Jork";
-            q2.Answer3 = "Bogota";
-            q2.Answer4 = "Caracass";
-            Questions.Add(q2);
+            var a1 = new Answer();
+            a1.Id = 1;
+            a1.Content = "Albert";
+            a1.IsCorrect = true;
+            q1.Answers.Add(a1);
+
+            var a2 = new Answer();
+            a2.Id = 2;
+            a2.Content = "Adam";
+            q1.Answers.Add(a2);
+
+            var a3 = new Answer();
+            a3.Id = 3;
+            a3.Content = "John";
+            q1.Answers.Add(a3);
+
+            var a4 = new Answer();
+            a4.Id = 4;
+            a4.Content = "Tom";
+            q1.Answers.Add(a4);
+
+            Questions.Add(q1);
         }
 
-        public Question DrawQuestion()
+        public void DrawQuestion()
         {
-            return Questions[0];
+            // naprawdę losować
+            CurrentQuestion = Questions[0];
+        }
+
+        public bool CheckUserAnswer(int number)
+        {
+            var userAnswer = CurrentQuestion.Answers.FirstOrDefault(x => x.Id == number);
+            return userAnswer.IsCorrect;
         }
 
     }
