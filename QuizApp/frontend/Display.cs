@@ -30,12 +30,25 @@ namespace QuizApp.frontend
             // zabronić wpisania czegokolwiek innego
             foreach (var answer in question.Answers)
             {
-                Console.WriteLine($" {answer.Id}. {answer.Content}");
+                Console.WriteLine($" {answer.DisplayOrder}. {answer.Content}");
             }
             Console.WriteLine();
             Console.Write(" Naciśnij 1, 2, 3 lub 4 => ");
             return int.Parse(Console.ReadLine());
         }
+
+        public static void DisplaySuccess(int points)
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(" Brawo, ukończyłeś/aś cały Quiz. Gratulacje !!! ...");
+            Console.WriteLine();
+            Console.WriteLine($" Łącznie zdobyłeś/aś {points} pkt. KONIEC GRY");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.ReadLine();
+        }
+
 
         public static void DisplayGameOver()
         {
@@ -46,6 +59,7 @@ namespace QuizApp.frontend
             Console.WriteLine();
             Console.WriteLine(" KONIEC GRY");
             Console.ForegroundColor = ConsoleColor.White;
+            Console.ReadLine();
         }
 
         public static void DiplayAnswerOk()
@@ -56,6 +70,8 @@ namespace QuizApp.frontend
             Console.WriteLine(" Brawo, to jest dobra odpowiedź. Gratulacje !!! ...");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(" Naciśnij ENTER, aby zobaczyć następne pytanie ...");
+            Console.ReadLine();
         }
 
     }

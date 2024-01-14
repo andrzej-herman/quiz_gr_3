@@ -2,32 +2,29 @@
 using QuizApp.frontend;
 
 var game = new Game();
-game.CreateQuestions();
 Display.DisplayWelcome();
-game.DrawQuestion();
-var number = Display.DisplayQuestion(game.CurrentQuestion);
-var isOk = game.CheckUserAnswer(number);
-if (isOk)
+
+while (true)
 {
-    Display.DiplayAnswerOk();
+    game.DrawQuestion();
+    var number = Display.DisplayQuestion(game.CurrentQuestion);
+    var isOk = game.CheckUserAnswer(number);
+    if (isOk)
+    {
+        if (game.IsLastQuestion())
+        {
+            Display.DisplaySuccess(game.PlayerPoints);
+            break;
+        }
+        else
+        {
+            Display.DiplayAnswerOk();
+        }
+    }
+    else
+    {
+        Display.DisplayGameOver();
+        break;
+    }
+
 }
-else
-{
-    Display.DisplayGameOver();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Console.ReadLine();
