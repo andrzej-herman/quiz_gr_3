@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuizApp.backend
+namespace Quiz
 {
     public class Game
     {
@@ -44,8 +44,8 @@ namespace QuizApp.backend
             {
                 answer.DisplayOrder = n++;
             }
-            
-            
+
+
             CurrentQuestion = question;
         }
 
@@ -73,7 +73,7 @@ namespace QuizApp.backend
                 CurrentCategory = AllCategories[CurrentCategoryIndex];
                 return false;
             }
-        
+
         }
     }
 }

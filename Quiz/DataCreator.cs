@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace QuizApp.backend
+namespace Quiz
 {
     public static class DataCreator
     {
@@ -13,7 +13,7 @@ namespace QuizApp.backend
         {
             var path = Directory.GetCurrentDirectory() + "\\questions.json";
             var data = File.ReadAllText(path);
-            var options = new JsonSerializerOptions {  PropertyNameCaseInsensitive = true };
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             return JsonSerializer.Deserialize<List<Question>>(data, options);
         }
     }

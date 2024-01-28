@@ -1,11 +1,6 @@
-﻿using QuizApp.backend;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Quiz;
 
-namespace QuizApp.frontend
+namespace QuizApp
 {
     public static class Display
     {
@@ -22,19 +17,17 @@ namespace QuizApp.frontend
 
         public static int DisplayQuestion(Question question)
         {
-            Console.Clear();
-            Console.WriteLine($" Pytanie za {question.Category} pkt.");
-            Console.WriteLine();
-            Console.WriteLine(" " + question.Content);
-            Console.WriteLine();
-            // zabronić wpisania czegokolwiek innego
-            foreach (var answer in question.Answers)
+            ShowQuestion(question);
+            var userInput = Console.ReadLine();
+            var correctKey = IsCorrectKey(userInput);
+            while (!correctKey)
             {
-                Console.WriteLine($" {answer.DisplayOrder}. {answer.Content}");
+                ShowQuestion(question);
+                userInput = Console.ReadLine();
+                correctKey = IsCorrectKey(userInput);
             }
-            Console.WriteLine();
-            Console.Write(" Naciśnij 1, 2, 3 lub 4 => ");
-            return int.Parse(Console.ReadLine());
+
+            return int.Parse(userInput);
         }
 
         public static void DisplaySuccess(int points)
@@ -72,6 +65,27 @@ namespace QuizApp.frontend
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(" Naciśnij ENTER, aby zobaczyć następne pytanie ...");
             Console.ReadLine();
+        }
+
+        private static bool IsCorrectKey(string input)
+        {
+            var acceptedKeys = new List<string>() { "1", "2", "3", "4" };
+            return acceptedKeys.Contains(input);
+        }
+
+        private static void ShowQuestion(Question question)
+        {
+            Console.Clear();
+            Console.WriteLine($" Pytanie za {question.Category} pkt.");
+            Console.WriteLine();
+            Console.WriteLine(" " + question.Content);
+            Console.WriteLine();
+            foreach (var answer in question.Answers)
+            {
+                Console.WriteLine($" {answer.DisplayOrder}. {answer.Content}");
+            }
+            Console.WriteLine();
+            Console.Write(" Naciśnij 1, 2, 3 lub 4 => ");
         }
 
     }

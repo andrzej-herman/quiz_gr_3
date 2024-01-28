@@ -1,5 +1,5 @@
-﻿using QuizApp.backend;
-using QuizApp.frontend;
+﻿using QuizApp;
+using Quiz;
 
 var game = new Game();
 Display.DisplayWelcome();
@@ -26,5 +26,4 @@ while (true)
         Display.DisplayGameOver();
         break;
     }
-
 }
